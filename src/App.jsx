@@ -2,14 +2,16 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Howl } from "howler";
 import StartScreen from "./components/StartScreen";
+import EndScreen from "./components/EndScreen";
 import { FaVolumeUp, FaVolumeMute } from 'react-icons/fa';
 import './App.css';
 
-function App(){
+function App() {
     return (
         <div className="app">
             <AnimatePresence mode="wait">
-                <StartScreen />
+                {/* <StartScreen /> */}
+                <EndScreen />
             </AnimatePresence>
         </div>
     )

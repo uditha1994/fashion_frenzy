@@ -1,0 +1,119 @@
+:root {
+    --primary: #ff6b9d;
+    --primary-light: #ff8fb3;
+    --secondary: #a18aff;
+    --accent: #ffcc5c;
+    --background: #fff5f9;
+    --card: #ffff;
+    --text: #333;
+    --text-light: #666;
+    --shadow: 0 4px 20px rgba(0,0,0,0.1);
+    --radius: 16px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Comic Neue', cursive, sans-serif;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--text);
+}
+
+.app {
+    min-height: 100vh;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* start screen  */
+.start-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding: 20px;
+    text-align: center;
+}
+
+.start-container {
+    max-width: 800px;
+    background: var(--card);
+    padding: 30px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.game-title {
+    font-size: 4rem;
+    color: var(--primary);
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+}
+
+.game-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    margin-bottom: 30px;
+}
+
+.characters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.character-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.character-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.character-avatar {
+    width: 100px;
+    height: 100px;
+    background-size: cover;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+}
+.character-avatar.kate {
+    background-image: url('/public/images/kate.png');
+}
+
+.character-avatar.bella {
+    background-image: url('/public/images/bella.png');
+}
+
+.character-avatar.sofia {
+    background-image: url('/public/images/sofia.png');
+}
+
+.play-button {
+    margin-top: 15px;
+    padding: 8px 20px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
