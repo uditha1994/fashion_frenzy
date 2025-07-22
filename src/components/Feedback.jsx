@@ -27,63 +27,64 @@ const Feedback = ({ feedback, handleContinue,
             emoji: "🙈🧶"
         }
     }
+    const { title, message, emoji } = getFeedbackMessages()
+
+    return (
+        <motion.div
+            className="feedback-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+        >
+            <motion.div
+                className="feedback-card"
+                initial={{ scale: 0.8 }}
+                animate={{ scale: 1 }}
+            >
+                <h2>{title} {emoji}</h2>
+
+                <div className="score-breakdown">
+                    <div className="score-item">
+                        <span>Style Points:</span>
+                        <span>{feedback.stylePoints}</span>
+                    </div>
+                    <div className="score-item">
+                        <span>Changes Match:</span>
+                        <span>{feedback.challegeMatch}</span>
+                    </div>
+                    <div className="score-item">
+                        <span>Bonus Points:</span>
+                        <span>{feedback.bonusPoints}</span>
+                    </div>
+                    <div className="score-item">
+                        <span>Total Score:</span>
+                        <span>{feedback.score}/100</span>
+                    </div>
+                </div>
+
+                <div className="feedback-comments">
+                    <h3>Fashion Notes:</h3>
+                    <p>{message}</p>
+                    <ul>
+                        {feedback.comments.map((comment, i) => (
+                            <li key={i}>{comment}</li>
+                        ))}
+                    </ul>
+                </div>
+
+                <motion.button
+                    className="continue-button"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={handleContinue}
+                >
+                    {isFinalLevel ? "See Final Result" : "Next Level"}
+                </motion.button>
+            </motion.div>
+        </motion.div>
+    )
 }
 
-const { title, message, emoji } = getFeedbackMessages()
 
-return (
-    <motion.div
-        className="feedback-overlay"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-    >
-        <motion.div
-            className="feedback-card"
-            initial={{ scale: 0.8 }}
-            animate={{ scale: 1 }}
-        >
-            <h2>{title} {emoji}</h2>
-
-            <div className="score-breakdown">
-                <div className="score-item">
-                    <span>Style Points:</span>
-                    <span>{feedback.stylePoints}</span>
-                </div>
-                <div className="score-item">
-                    <span>Changes Match:</span>
-                    <span>{feedback.challegeMatch}</span>
-                </div>
-                <div className="score-item">
-                    <span>Bonus Points:</span>
-                    <span>{feedback.bonusPoints}</span>
-                </div>
-                <div className="score-item">
-                    <span>Total Score:</span>
-                    <span>{feedback.score}/100</span>
-                </div>
-            </div>
-
-            <div className="feedback-comments">
-                <h3>Fashion Notes:</h3>
-                <p>{message}</p>
-                <ul>
-                    {feedback.comments.map((comment, i) => (
-                        <li key={i}>{comment}</li>
-                    ))}
-                </ul>
-            </div>
-
-            <motion.button
-                className="continue-button"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={handleContinue}
-            >
-                {isFinalLevel ? "See Final Result" : "Next Level"}
-            </motion.button>
-        </motion.div>
-    </motion.div>
-)
 
 export default Feedback
