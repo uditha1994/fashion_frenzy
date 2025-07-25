@@ -12,9 +12,9 @@ const StartScreen = ({ startGame, muted }) => {
 
     //Click sound
     const playClickSound = () => {
-        if(!muted){
+        if (!muted) {
             const sound = new Howl({
-                src: ['/public/sounds/click.wav'],
+                src: ['/sounds/click.wav'],
                 volume: 0.7
             })
             sound.play()
@@ -55,7 +55,10 @@ const StartScreen = ({ startGame, muted }) => {
                         <motion.div
                             key={char.id}
                             className="character-card"
-                            onClick={() => { }}
+                            onClick={() => { 
+                                playClickSound(); 
+                                startGame(char.id) 
+                            }}
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                         >

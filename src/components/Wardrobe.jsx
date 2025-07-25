@@ -14,11 +14,11 @@ const Wardrobe = ({ currentChallenge, selectedItems, addItem, muted }) => {
             { id: 't3', type: 'tops', name: 'T-Shirt', style: 'casual', color: 'blue', points: 5 },
             { id: 't4', type: 'tops', name: 'Sweater', style: 'warm', color: 'yellow', points: 12 }
         ],
-        bottom: [
-            { id: 'b1', type: 'bottom', name: 'Jeans', style: 'casual', color: 'blue', points: 10 },
-            { id: 'b2', type: 'bottom', name: 'Skirt', style: 'formal', color: 'black', points: 15 },
-            { id: 'b3', type: 'bottom', name: 'Short', style: 'casual', color: 'denim', points: 5 },
-            { id: 'b4', type: 'bottom', name: 'Leggings', style: 'sporty', color: 'gray', points: 12 }
+        bottoms: [
+            { id: 'b1', type: 'bottoms', name: 'Jeans', style: 'casual', color: 'blue', points: 10 },
+            { id: 'b2', type: 'bottoms', name: 'Skirt', style: 'formal', color: 'black', points: 15 },
+            { id: 'b3', type: 'bottoms', name: 'Short', style: 'casual', color: 'denim', points: 5 },
+            { id: 'b4', type: 'bottoms', name: 'Leggings', style: 'sporty', color: 'gray', points: 12 }
         ],
         shoes: [
             { id: 's1', type: 'shoes', name: 'Sneakers', style: 'casual', color: 'white', points: 10 },
@@ -43,7 +43,7 @@ const Wardrobe = ({ currentChallenge, selectedItems, addItem, muted }) => {
     const playSelectedSound = () => {
         if (!muted) {
             const sound = new Howl({
-                src: ['/public/sounds/click.wav'],
+                src: ['/sounds/click.wav'],
                 volume: 0.4
             })
             sound.play()
@@ -75,7 +75,7 @@ const Wardrobe = ({ currentChallenge, selectedItems, addItem, muted }) => {
                         className={`wardrobe-item ${isItemSelected(item) ? 'selected' : ''}`}
                         onClick={() => {
                             playSelectedSound()
-                            addItem()
+                            addItem(item)
                         }}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}

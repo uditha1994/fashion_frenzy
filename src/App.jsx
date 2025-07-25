@@ -4,7 +4,6 @@ import { Howl } from "howler";
 import StartScreen from "./components/StartScreen";
 import EndScreen from "./components/EndScreen";
 import GameScreen from "./components/GameScreen"
-import Wardrobe from "./components/Wardrobe";
 import { FaVolumeUp, FaVolumeMute } from 'react-icons/fa';
 import './App.css';
 
@@ -69,7 +68,7 @@ function App() {
 
     return (
         <div className="app">
-            <button className="sound-toggle" onClick={() => sounds.background.play()}>
+            <button className="sound-toggle" onClick={toggleMusic}>
                 {muted ? <FaVolumeMute /> : <FaVolumeUp />}
             </button>
             <AnimatePresence mode="wait">
@@ -83,7 +82,7 @@ function App() {
 
                 {gameState === 'game' && (
                     <GameScreen
-                        key="game"
+                        key='game'
                         endGame={endGame}
                         level={level}
                         setLevel={setLevel}

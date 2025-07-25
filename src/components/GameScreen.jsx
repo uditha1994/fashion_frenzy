@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, scale } from "framer-motion";
 import { Howl } from "howler";
 import Wardrobe from "./Wardrobe";
 import Character from "./Character";
@@ -7,7 +7,6 @@ import Feedback from "./Feedback";
 import { challenges } from "../utils/challenges";
 import { calculateScore } from "../utils/scoreCalculator";
 import { FiArrowLeft } from "react-icons/fi";
-import { pre } from "framer-motion/client";
 
 const GameScreen = ({ endGame, level, setLevel, character, sounds, muted }) => {
     const [selectedItems, setSelectedItems] = useState([]);
@@ -102,6 +101,55 @@ const GameScreen = ({ endGame, level, setLevel, character, sounds, muted }) => {
                     <div className="timer">⏱️ {timer}</div>
                     <div className="level">Level {level} of {challenges.length}</div>
                 </div>
+            </div>
+            <div className="game-container">
+                <div className="challenge-card">
+                    <h3>Challenge:</h3>
+                    <h2>{currentChallenge.title}</h2>
+                    <p>{currentChallenge.description}</p>
+                    <div className="requirements">
+                        <h4>Requirements:</h4>
+                        <ul>
+                            {currentChallenge.requirements.map((req, i) => (
+                                <li key={i}>{req}</li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+                <Character
+                    chacter={character}
+                    selectedItems={selectedItems}
+                    removeItem={removeItem}
+                    feedback={feedback}
+                />
+                <Wardrobe
+                    currentChallenge={currentChallenge}
+                    selectedItems={selectedItems}
+                    addItem={addItem}
+                    muted={muted}
+                />
+
+                <div className="submit-area">
+                    <motion.button
+                        className="submit-button"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={{ handleSubmit }}
+                        disabled={selectedItems.length === 0 || gamePaused}
+                    >
+                        Submit Outfit
+                    </motion.button>
+                </div>
+
+                <AnimatePresence>
+                    {showFeedback && (
+                        <Feedback
+                            feedback={feedback}
+                            handleContinue={handleContinue}
+                            isFinalLevel={level === challenges.length}
+                        />
+                    )}
+                </AnimatePresence>
             </div>
         </motion.div>
     )
