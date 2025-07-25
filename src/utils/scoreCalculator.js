@@ -37,40 +37,61 @@ export const calculateScore = (selectedItems, requirements, level) => {
         }
     }
 
-    if(reqsMet.formal){
+    if (reqsMet.formal) {
         totalReqs++;
         const hasFormal = selectedItems.some
-        (item => item.type === 'formal')
-        if(hasFormal){
+            (item => item.type === 'formal')
+        if (hasFormal) {
             reqsCount++
             comments.push('✅ Perfect formal pieces selected!')
-        } else{
+        } else {
             comments.push('❌ This event requires formal attire!')
         }
     }
 
-    if(reqsMet.accessories){
+    if (reqsMet.accessories) {
         totalReqs++
         const accessoryCount = selectedItems.filter(
             item => item.type === 'accessories').length
-            if(accessoryCount > 0){
-                reqsCount++
-                comments.push(`✅ Great job with ${accessoryCount} accessories!`)
-            } else{
-                comments.push("❌ Don't forget accessories to complete your look")
-            }
+        if (accessoryCount > 0) {
+            reqsCount++
+            comments.push(`✅ Great job with ${accessoryCount} accessories!`)
+        } else {
+            comments.push("❌ Don't forget accessories to complete your look")
+        }
     }
 
     //Calculate challenge match persentage
-    challengeMatch = totalReqs > 0 ? 
-    (reqsCount /totalReqs) * 30 : 30
+    challengeMatch = totalReqs > 0 ?
+        (reqsCount / totalReqs) * 30 : 30
     challengeMatch = Math.round(challengeMatch)
 
     //check for bonus points
-    const colors = selectedItems.map(item =>item.color)
+    const colors = selectedItems.map(item => item.color)
     const uniqueColors = [...new Set(colors)]
 
-    if(uniqueColors.length <= 2){
+    if (uniqueColors.length <= 2) {
         bonusPoints += 10
+        comments.push("🌟 Bonus: Great color coordinations!!")
+    }
+
+    const styles = selectedItems.map(item => item.style)
+    const uniqueStyles = [...new Set(styles)]
+
+    if (uniqueStyles.length === 1) {
+        bonusPoints += 10
+        comments.push(`🌟 Bonus: Perfect ${uniqueStyles[0]} style consistency`)
+    }
+
+    //calculate total score (style+challege+bonus)
+    const totalScore = Math.min(stylePoints + challengeMatch + bonusPoints, 100)
+
+    return {
+        score: totalScore,
+        totalScore: totalScore * level,
+        stylePoints,
+        challengeMatch,
+        bonusPoints,
+        comments
     }
 }

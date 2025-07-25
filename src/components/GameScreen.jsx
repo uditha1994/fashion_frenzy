@@ -134,7 +134,7 @@ const GameScreen = ({ endGame, level, setLevel, character, sounds, muted }) => {
                         className="submit-button"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        onClick={{ handleSubmit }}
+                        onClick={ handleSubmit }
                         disabled={selectedItems.length === 0 || gamePaused}
                     >
                         Submit Outfit
